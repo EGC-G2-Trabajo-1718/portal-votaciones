@@ -1,0 +1,12 @@
+Flask
+Flask-Login
+Flask-Babel
+Flask-Principal
+Flask-Via
+Flask-WTF
+Jinja2
+MarkupSafe
+Werkzeug
+click
+itsdangerous
+requests
