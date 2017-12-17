@@ -1,14 +1,23 @@
 # coding=utf-8
 import json
 import urllib3
+from datetime import datetime
+from time import strptime
+
+
+def extraccion_datos(uri):
+    http = urllib3.PoolManager()
+    r = http.request('GET', uri)
+    datos = json.loads(r.data.decode('utf-8'))
+
+    return datos
+
 
 def parseEdades():
     edades = ["18-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90+"]
     array_recuento = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-    http = urllib3.PoolManager()
-    r = http.request('GET', 'http://localhost:3000/edades')
-    datos = json.loads(r.data.decode('utf-8'))
+    datos = extraccion_datos('http://localhost:3000/edades');
 
     def acumulador(recuento):
 
@@ -42,13 +51,20 @@ def parseEdades():
 
 # Sirve tanto para ciudades, provincias, comunidades autónomas, y paises, ya que se recibirá el mismo formato de json
 
-def parseLugaresGeograficos(nombreDeFichero):
+def parseLugaresGeograficos(opcion):
     sitios = []
     array_recuento = []
 
-    data = json.load(open(nombreDeFichero))
+    if (opcion == "ciudades"):
+        datos = extraccion_datos('http://localhost:3000/ciudades');
+    elif (opcion == "pronvicias"):
+        datos = extraccion_datos('http://localhost:3000/provincias');
+    elif (opcion == "comunidades"):
+        datos = extraccion_datos('http://localhost:3000/comunidades');
+    elif (opcion == "paises"):
+        datos = extraccion_datos('http://localhost:3000/paises');
 
-    for i in data['data']:
+    for i in datos[0]['data']:
         for key in i.keys():
             sitios.append(key)
             array_recuento.append(i[key])
@@ -57,18 +73,12 @@ def parseLugaresGeograficos(nombreDeFichero):
 
 
 def obtener_censo():
-    http = urllib3.PoolManager()
-    r = http.request('GET', 'http://localhost:3000/recuento')
-    datos = json.loads(r.data.decode('utf-8'))
-
+    datos = extraccion_datos('http://localhost:3000/recuento');
     return datos[0]['total_voters']
 
 
 def obtener_votantes():
-    http = urllib3.PoolManager()
-    r = http.request('GET', 'http://localhost:3000/recuento')
-    datos = json.loads(r.data.decode('utf-8'))
-
+    datos = extraccion_datos('http://localhost:3000/recuento');
     return datos[0]['total_votes']
 
 
@@ -76,9 +86,7 @@ def votosPorOpcion():
     opciones = []
     votos = []
 
-    http = urllib3.PoolManager()
-    r = http.request('GET', 'http://localhost:3000/recuento')
-    datos = json.loads(r.data.decode('utf-8'))
+    datos = extraccion_datos('http://localhost:3000/recuento');
 
     for i in datos[0]['results']:
         opciones.append(i)
@@ -87,4 +95,43 @@ def votosPorOpcion():
         votos.append(i);
 
     return opciones, votos
+
+
+def votosPorTramoHorario():
+    tramos = ["00:00 - 05:00", "05:00 - 10:00", "10:00 - 15:00", "15:00 - 20:00", "20:00 - 24:00"]
+    array_recuento = [0, 0, 0, 0, 0]
+
+    def recuento(recuento):
+        if (hora_formato >= inicio_primerTramo and hora_formato <= fin_primerTramo):
+            array_recuento[0] = array_recuento[0] + 1
+        elif (hora_formato >= inicio_segundoTramo and hora_formato <= fin_segundoTramo):
+            array_recuento[1] = array_recuento[1] + 1
+        elif (hora_formato >= inicio_tercerTramo and hora_formato <= fin_tercerTramo):
+            array_recuento[2] = array_recuento[2] + 1
+        elif (hora_formato >= inicio_cuartoTramo and hora_formato <= fin_cuartoTramo):
+            array_recuento[3] = array_recuento[3] + 1
+        elif (hora_formato >= inicio_quintoTramo and hora_formato <= fin_quintoTramo):
+            array_recuento[4] = array_recuento[4] + 1
+
+    inicio_primerTramo = datetime(*strptime("00:00:00", "%H:%M:%S")[0:6]).time()
+    fin_primerTramo = datetime(*strptime("05:00:00", "%H:%M:%S")[0:6]).time()
+    inicio_segundoTramo = datetime(*strptime("05:00:01", "%H:%M:%S")[0:6]).time()
+    fin_segundoTramo = datetime(*strptime("10:00:00", "%H:%M:%S")[0:6]).time()
+    inicio_tercerTramo = datetime(*strptime("10:00:01", "%H:%M:%S")[0:6]).time()
+    fin_tercerTramo = datetime(*strptime("15:00:00", "%H:%M:%S")[0:6]).time()
+    inicio_cuartoTramo = datetime(*strptime("15:00:01", "%H:%M:%S")[0:6]).time()
+    fin_cuartoTramo = datetime(*strptime("20:00:00", "%H:%M:%S")[0:6]).time()
+    inicio_quintoTramo = datetime(*strptime("20:00:01", "%H:%M:%S")[0:6]).time()
+    fin_quintoTramo = datetime(*strptime("23:59:59", "%H:%M:%S")[0:6]).time()
+
+    datos = extraccion_datos('http://localhost:3000/horas')
+
+    for i in datos[0]['data']:
+        hora = i['momento'].split(' ')[1]
+        hora_formato = datetime(*strptime(hora, "%H:%M:%S")[0:6]).time()
+        recuento(array_recuento)
+
+
+    return tramos,array_recuento
+
 
