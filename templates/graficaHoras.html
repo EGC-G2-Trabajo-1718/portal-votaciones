@@ -4,7 +4,7 @@
 
     <!--<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 
-    <title>Gráfica edades</title>
+    <title>Gráfica votos por tramo horario</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
 
 
@@ -25,17 +25,17 @@
     var myChart = new Chart(ctx, {
 
         /*TIPO DE GRÁFICO*/
-        type: 'horizontalBar',
+        type: 'bar',
 
         data: {
 
             /* ETIQUETAS */
-            labels: {{ edades|safe }},
+            labels: {{ tramos|safe }},
             datasets: [{
-                label: 'Votos por edades',
+                label: 'Votos por tramo horario',
 
                 /* DATOS (parcheados previamente) */
-                data: {{ recuento|safe }},
+                data: {{ votos|safe }},
 
                 /*ESTILOS DE LA GRAFICAS*/
                 backgroundColor: [

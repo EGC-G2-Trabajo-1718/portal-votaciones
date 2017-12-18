@@ -4,7 +4,7 @@
 
     <!--<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 
-    <title>Gráfica edades</title>
+    <title>Gráfica voto y censo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
 
 
@@ -30,12 +30,12 @@
         data: {
 
             /* ETIQUETAS */
-            labels: {{ edades|safe }},
+            labels: ['Censo total','Número de votos'],
             datasets: [{
-                label: 'Votos por edades',
+                label: 'Personas',
 
                 /* DATOS (parcheados previamente) */
-                data: {{ recuento|safe }},
+                data: {{ censo_y_votos|safe }},
 
                 /*ESTILOS DE LA GRAFICAS*/
                 backgroundColor: [

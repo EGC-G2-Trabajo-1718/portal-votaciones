@@ -49,8 +49,6 @@ def parseEdades():
     return edades, array_recuento;
 
 
-# Sirve tanto para ciudades, provincias, comunidades autónomas, y paises, ya que se recibirá el mismo formato de json
-
 def parseLugaresGeograficos(opcion):
     sitios = []
     array_recuento = []
@@ -66,7 +64,7 @@ def parseLugaresGeograficos(opcion):
 
     for i in datos[0]['data']:
         for key in i.keys():
-            sitios.append(key)
+            sitios.append(key.encode('utf-8'))
             array_recuento.append(i[key])
 
     return sitios, array_recuento
@@ -89,7 +87,7 @@ def votosPorOpcion():
     datos = extraccion_datos('http://localhost:3000/recuento');
 
     for i in datos[0]['results']:
-        opciones.append(i)
+        opciones.append(i.encode('utf-8'))
 
     for i in datos[0]['results'].values():
         votos.append(i);
