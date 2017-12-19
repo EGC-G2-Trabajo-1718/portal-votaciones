@@ -2631,6 +2631,7 @@ input[type="search"] {
 }
 .form-group {
   margin-bottom: 15px;
+  padding-bottom: 3%;
 }
 .radio,
 .checkbox {
@@ -3116,19 +3117,19 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #216c5b;
+  border-color: #1c342c;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
+  background-color: #63da85;
+  border-color: #1c342c;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #63da85;
+  border-color: #1c342c;
 }
 .btn-primary:active,
 .btn-primary.active,
