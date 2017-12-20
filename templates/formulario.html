@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Inicio</title>
+
+    {% include 'includes.html' %}
+
+</head>
+<body>
+
+{% include 'menu.html' %}
+
+<div class="container">
+
+    <div class="jumbotron">
+        <form method="post" role="form">
+            <div class="form-group">
+                <label for="ej_nombre" class="col-md-2">Nombre</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="ej_nombre" placeholder="Nombre de la votación">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ej_censo" class="col-md-2">Censo</label>
+                <div class="col-md-10">
+                <select class="form-control" id="ej_censo" required>
+                    <option>Censo 1</option>
+                    <option>Censo 2</option>
+                    <option>Censo 3</option>
+                    <option>Censo 4</option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ej_votacion" class="col-md-2">Votacion</label>
+                <div class="col-md-10">
+                <select class="form-control" id="ej_votacion" required>
+                    <option>Votacion 1</option>
+                    <option>Votacion 2</option>
+                    <option>Votacion 3</option>
+                    <option>Votacion 4</option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ej_observacion" class="col-md-2">Observaciones</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="5" id="ej_observacion" placeholder="Inserte las observaciones (si procede)."></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ej_radio" class="col-md-2">Pregunta</label>
+                <br>
+                <div class="col-md-10">
+                        <label class="radio"><input type="radio" name="optradio" id="ej_radio">Option 1</label>
+                        <label class="radio"><input type="radio" name="optradio" id="ej_radio1">Option 2</label>
+                        <label class="radio"><input type="radio" name="optradio" id="ej_radio2">Option 3</label>
+                    <br>
+                    </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary col-md-2 col-xs-12">Enviar</button>
+        </form>
+    </div>
+
+</div>
+</body>
+
+</html>

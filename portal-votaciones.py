@@ -1,13 +1,20 @@
-# coding=utf-8
 from flask import Flask , render_template
 import parsingDeFicheros
-
 
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def main():
+    return 'Hello world!'
+
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/formulario')
+def formulario():
+    return render_template('formulario.html')
 
 
 @app.route('/graficaEdad')
