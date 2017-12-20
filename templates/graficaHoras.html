@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <!--<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+    <title>Gráfica votos por tramo horario</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+
+
+</head>
+
+<body>
+
+<!--LLAMADA AL SCRIPT DE LA GRAFICA-->
+<div class="container">
+    <!--TO DO: modificar dimensiones-->
+    <canvas id="myChart"></canvas>
+</div>
+
+<!-- SCRIPT DE LA PROPIA GRÁFICA-->
+<script type="text/javascript">
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+
+        /*TIPO DE GRÁFICO*/
+        type: 'bar',
+
+        data: {
+
+            /* ETIQUETAS */
+            labels: {{ tramos|safe }},
+            datasets: [{
+                label: 'Votos por tramo horario',
+
+                /* DATOS (parcheados previamente) */
+                data: {{ votos|safe }},
+
+                /*ESTILOS DE LA GRAFICAS*/
+                backgroundColor: [
+                    /* red, green, azul, transparencia(0->transparente, 1->solido)*/
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>
