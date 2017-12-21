@@ -16,6 +16,18 @@ def index():
 def formulario():
     return render_template('formulario.html')
 
+@app.route('/myVotes')
+def myvotes():
+    return render_template('listVotes.html')
+
+@app.route('/vote')
+def vote():
+    censo = parsingDeFicheros.obtener_censo()
+    votos = parsingDeFicheros.obtener_votantes()
+    censo_y_votos = [censo, votos]
+    opciones,votos = parsingDeFicheros.votosPorOpcion()
+    return render_template('vote.html',opciones=opciones, votos=votos, censo_y_votos=censo_y_votos)
+
 
 @app.route('/graficaEdad')
 def graficaedad():

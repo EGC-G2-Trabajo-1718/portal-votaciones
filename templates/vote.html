@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Votación Cerrada</title>
+    {% include 'includes.html' %}
+</head>
+<body>
+
+{% include 'menu.html' %}
+
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Elecciones catalanas 21-D</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <p>Nombre de la votacion: Elecciones catalanas 21-D</p>
+                <p>Descripcion: Elecciones extraordinarias concecuencia de la aplicación del articulo 155 por el gobierno central de españa.</p>
+                <p>Censo/s: Catalanes</p>
+                <p>Número máximo de participantes: 7.000.000</p>
+                <p>Numero de participantes: 2.500.000</p>
+                <p>Porcentaje de participacion: 35,7%</p>
+            </div>
+            <div class="col-md-6">
+                <div class="container">
+                    <canvas id="ChartCenso"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div id="canvas-holder">
+                    <canvas id="chart-area"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <a href="../moreCharts" class="btn btn-primary center-block">Más Gráficas</a>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+
+        }
+
+        return color;
+    }
+
+    var grafica = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{ votos|safe }},
+                backgroundColor: getRandomColor(),
+
+            }],
+            labels: {{ opciones|safe }}
+
+        },
+        options: {
+            responsive: true,
+            legend: {
+                labels: {
+
+                    fontColor: 'black',
+                    fontStyle: 'bold'
+
+                },
+                position: 'right',
+            },
+            title: {
+                display: true,
+                text: 'Resultados de la votación',
+                fontColor: 'black',
+                fontSize: 22,
+                fontStyle: ''
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.graficaResultados = new Chart(ctx, grafica);
+    };
+</script>
+<script type="text/javascript">
+
+    var ctx = document.getElementById("ChartCenso");
+    var ChartCenso = new Chart(ctx, {
+
+        /*TIPO DE GRÁFICO*/
+        type: 'horizontalBar',
+
+        data: {
+
+            /* ETIQUETAS */
+            labels: ['Censo total', 'Número de votos'],
+            datasets: [{
+                label: 'Personas',
+
+                /* DATOS (parcheados previamente) */
+                data: {{ censo_y_votos|safe }},
+
+                /*ESTILOS DE LA GRAFICAS*/
+                backgroundColor: [
+                    /* red, green, azul, transparencia(0->transparente, 1->solido)*/
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255,99,100,1)',
+                    'rgba(54, 162, 200, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>

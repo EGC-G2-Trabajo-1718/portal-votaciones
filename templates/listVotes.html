@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Votaciones</title>
+
+    {% include 'includes.html' %}
+</head>
+<body>
+
+{% include 'menu.html' %}
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Titulo</th>
+                    <th>Mi estado</th>
+                    <th>nº Votos</th>
+                    <th>Censo</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="list-group-item-warning">
+                    <td>Cerrada</td>
+                    <td>Eleciones Catalanas 1-D</td>
+                    <td>Votado</td>
+                    <td>2.500.000</td>
+                    <td>Cataluña</td>
+                    <td><a href="../vote" class="btn btn-primary">Mostrar</a></td>
+                </tr>
+                <tr class="list-group-item-success">
+                    <td>Abierta</td>
+                    <td>Eleccion precidente</td>
+                    <td>No Votado</td>
+                    <td>20</td>
+                    <td>Comunidad 1</td>
+                    <td><a href="../vote" class="btn btn-primary">Mostrar</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
