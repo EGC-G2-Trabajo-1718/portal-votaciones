@@ -28,6 +28,21 @@ def vote():
     opciones,votos = parsingDeFicheros.votosPorOpcion()
     return render_template('vote.html',opciones=opciones, votos=votos, censo_y_votos=censo_y_votos)
 
+@app.route('/nationalityChart')
+def nacionalityChart():
+    ciudades,votos = parsingDeFicheros.parseLugaresGeograficos("ciudades")
+    return render_template('nationalityChart.html',ciudades=ciudades, votos=votos)
+
+@app.route('/ageChart')
+def ageChart():
+    rango,votos = parsingDeFicheros.parseEdades()
+    return render_template('ageChart.html',edades=rango, recuento=votos)
+
+@app.route('/hourChart')
+def hourChart():
+    tramos,votos = parsingDeFicheros.votosPorTramoHorario()
+    return render_template('hourChart.html',tramos=tramos, votos=votos)
+
 
 @app.route('/graficaEdad')
 def graficaedad():
