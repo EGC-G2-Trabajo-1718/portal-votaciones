@@ -39,6 +39,11 @@ def graficaciudad():
     ciudades,votos = parsingDeFicheros.parseLugaresGeograficos("ciudades")
     return render_template('graficaCiudad.html',ciudades=ciudades, votos=votos)
 
+@app.route('/graficaPaises')
+def graficaPaises():
+    paises,votos = parsingDeFicheros.parseLugaresGeograficos("paises")
+    return render_template('graficaPais.html',paises=paises, votos=votos)
+
 @app.route('/graficaResultados')
 def graficaResultados():
     opciones,votos = parsingDeFicheros.votosPorOpcion()
