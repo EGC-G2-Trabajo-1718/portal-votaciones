@@ -34,10 +34,16 @@ def index():
 """
 	Auth routes
 """
-@app.route('/login')
+@app.route('/login', methods=['GET'])
+def loginForm():
+	response = authController.loginForm()
+	return response
+
+@app.route('/login', methods=['POST'])
 def login():
 	response = authController.login()
 	return response
+
 
 
 """
@@ -79,25 +85,36 @@ def listCensus():
 	response = censusMngController.listCensus()
 	return response
 
+@app.route('/census/<int:census_id>', methods=['GET'])
+def getCensus(census_id):
+	response = censusMngController.getCensus(census_id)
+	return response
+
 @app.route('/census/create', methods=['GET'])
+def createCensusForm():
+	response = censusMngController.createForm()
+	return response
+
+@app.route('/census/create', methods=['POST'])
 def createCensus():
-	response = censusMngController.createCensus()
+	response = censusMngController.create()
 	return response
 
 @app.route('/census/edit/<int:census_id>', methods=['GET'])
-def showEditCensus(census_id):
-	response = votingMngController.showEditCensus(census)
+def editCensusForm(census_id):
+	response = censusMngController.editForm(census_id)
 	return response
 
 @app.route('/census/edit/<int:census_id>', methods=['POST'])
 def editCensus(census_id):
-	response = censusMngController.editVoting(census_id)
+	response = censusMngController.edit(census_id)
 	return response
 
 @app.route('/census/delete/<int:census_id>', methods=['GET'])
 def deleteCensus(census_id):
 	response = censusMngController.deleteCensus(census_id)
 	return response
+
 
 @app.route('/index/test')
 def indexTest():

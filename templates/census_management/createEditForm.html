@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Lista de Censos</title>
+
+        {% include 'base/includes.html' %}
+    </head>
+    <body>
+
+        {% include 'base/menu.html' %}
+
+        <div class="container">
+            <div class="jumbotron">
+                <div>
+                    {% if census != None %}
+                        <h2>Editar censo: {{ census.nombre }}</h2>
+                    {% else %}
+                        <h2>Crear un nuevo censo</h2>
+                    {% endif %}
+                </div>
+                <form action="{{ formUrl }}" method="POST" role="form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" required
+                            {% if census != None %}
+                                value="{{ census.nombre }}"
+                            {% endif %}
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="votaciones"> Votación:</label>
+                        <select class="form-control" id="votaciones" name="id_votacion" required>
+                              <option value="">Seleccione una votación</option>
+                              <option value="id1">Votación1</option>
+                              <option value="id2">Votación2</option>
+                              <option value="id3">Votación3</option>
+                              <option value="id4">...</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="roles">Rol/Grupo:</label>
+                        <select class="form-control" id="roles" name="rol" required>
+                          <option value="">Seleccione un rol/grupo</option>
+                          <option value="ASISTENTE">ASISTENTE</option>
+                          <option value="PONENTE">PONENTE</option>
+                          <option value="AMBOS">AMBOS</option>
+                          <option value="...">...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_ini"> Fecha Inicio:</label>
+                        <input  class="form-control" type="datetime-local" id="fecha_ini" name="fecha_ini" placeholder="dd/mm/yyyy hh:mm"
+                            {% if census != None %}
+                                value="{{ census.fecha_ini }}"
+                            {% endif %}
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_fin"> Fecha Fin:</label>
+                        <input class="form-control" type="datetime-local" id="fecha_fin" name="fecha_fin" placeholder="dd/mm/yyyy hh:mm"
+                            {% if census != None %}
+                                value="{{ census.fecha_fin }}"
+                            {% endif %}
+                        />
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-warning" href="{{ url_for('listCensus') }}">Cancelar</a>
+                        <button class="btn btn-success">
+                            {% if census != None %}
+                            Guardar
+                            {% else %}
+                            Crear
+                            {% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

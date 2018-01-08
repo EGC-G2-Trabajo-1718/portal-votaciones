@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Lista de Censos</title>
+
+        {% include 'base/includes.html' %}
+    </head>
+    <body>
+
+        {% include 'base/menu.html' %}
+
+        <div class="container">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2>Crear un nuevo censo</h2>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <a href="{{ url_for('createCensusForm') }}" class="btn btn-primary">Crear un nuevo censo</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha fin</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in data %}
+                            <tr>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.fecha_ini }}</td>
+                                <td>{{ item.fecha_fin }}</td>
+                                <td>
+                                    <a href="{{ url_for('editCensusForm', census_id = item.id) }}" class="btn btn-primary">Editar</a>
+                                    <a href="{{ url_for('deleteCensus', census_id = item.id) }}" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

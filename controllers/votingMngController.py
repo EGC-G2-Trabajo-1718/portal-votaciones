@@ -3,7 +3,10 @@ from controllers.basecontroller import *
 class VotingMngController(BaseController):
 
 	def __init__(self):
-		super().__init__('/administracionVotaciones', 'voting_management')
+		super().__init__(config.VOTING_MNG_CONFIG['host'],
+						 config.VOTING_MNG_CONFIG['port'],
+						 config.VOTING_MNG_CONFIG['baseApi'],
+						 config.VOTING_MNG_CONFIG['baseTemplate'])
 
 	def listVoting(self):
 		return 'List voting'

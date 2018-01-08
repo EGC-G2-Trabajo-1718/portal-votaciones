@@ -1,31 +1,29 @@
-<!doctype html>
-<html lang="es">
-
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="utf-8">
     <title>{{ title }} - nVotes@US</title>
 
     {% include 'base/includes.html' %}
-
 </head>
-
 <body>
-
-{% include 'base/menu.html' %}
-
-<!-- Main component for a primary marketing message or call to action -->
-    <div class="container">
+  {% include 'base/menu.html' %}
+  <div class="container">
       <div class="jumbotron">
-        <h1>{{ request.args.get('q', '') }}</h1>
-        <p>{{ username }}</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs »</a>
-        </p>
+        <form class="form" action="/login" method="post">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Correo electronico</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electronico">
+            </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
       </div>
-    </div>
+  </div>
 
 </body>
-
 </html>
-
-
-

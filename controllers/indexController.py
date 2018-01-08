@@ -3,10 +3,13 @@ from controllers.basecontroller import *
 class IndexController(BaseController):
 
 	def __init__(self):
-		super().__init__('/', 'index/')
+		super().__init__(config.INDEX_CONFIG['host'],
+						 config.INDEX_CONFIG['port'],
+						 config.INDEX_CONFIG['baseApi'],
+						 config.INDEX_CONFIG['baseTemplate'])
 
 
 	def index(self):
 		title = 'Index'
-		return render_template(self.baseTemplatePath + 'index.html', title=title)
-		#return super().callApi('http://127.0.0.1:5000/index/test', 'GET', {})['var1']
+		template = self.templatePath('index.html')
+		return render_template(template, title=title)
