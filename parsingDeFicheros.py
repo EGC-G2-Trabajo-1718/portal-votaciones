@@ -70,21 +70,50 @@ def parseLugaresGeograficos(opcion):
     return sitios, array_recuento
 
 
-def obtener_censo():
-    datos = extraccion_datos('http://localhost:3000/recuento');
+def obtener_censo(id,auth):
+    if((id and auth) != None):
+        datos = extraccion_datos('http://egc-recuento1718.es/api/polls/' + str(id) + '/' + str(auth));
+    else:
+        datos = extraccion_datos('http://localhost:3000/recuentoDatosCompletos');
     return datos[0]['total_voters']
 
 
-def obtener_votantes():
-    datos = extraccion_datos('http://localhost:3000/recuento');
+def obtener_votantes(id,auth):
+    if ((id and auth) != None):
+        datos = extraccion_datos('http://egc-recuento1718.es/api/polls/' + str(id) + '/' + str(auth));
+    else:
+        datos = extraccion_datos('http://localhost:3000/recuentoDatosCompletos');
     return datos[0]['total_votes']
+
+
+def votosPorOpcionNuevaApi(id,auth):
+    opciones = []
+    votos = []
+
+    if ((id and auth) != None):
+        datos = extraccion_datos('http://egc-recuento1718.es/api/vote/' + str(id) + '/' + str(auth));
+    else:
+        datos = extraccion_datos('http://localhost:3000/recuentoResultados');
+
+    i = 0
+    for valor in datos[0]:
+        if(i==0):
+            opciones.append(valor.encode('utf-8'))
+        elif(i%2 == 0):
+            opciones.append(valor.encode('utf-8'))
+        elif(i%2 !=0):
+            votos.append(valor)
+
+        i = i+1
+
+    return opciones, votos
 
 
 def votosPorOpcion():
     opciones = []
     votos = []
 
-    datos = extraccion_datos('http://localhost:3000/recuento');
+    datos = extraccion_datos('http://localhost:3000/recuentoDatosCompletos');
 
     for i in datos[0]['results']:
         opciones.append(i.encode('utf-8'))

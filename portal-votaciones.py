@@ -44,9 +44,10 @@ def graficaPaises():
     paises,votos = parsingDeFicheros.parseLugaresGeograficos("paises")
     return render_template('graficaPais.html',paises=paises, votos=votos)
 
+
 @app.route('/graficaResultados')
 def graficaResultados():
-    opciones,votos = parsingDeFicheros.votosPorOpcion()
+    opciones,votos = parsingDeFicheros.votosPorOpcionNuevaApi(None,None)
     return render_template('graficaResultados.html',opciones=opciones, votos=votos)
 
 @app.route('/graficaHoras')
@@ -56,8 +57,8 @@ def graficaHoras():
 
 @app.route('/grafica_censo_votos')
 def graficaCensoYVotos():
-    censo = parsingDeFicheros.obtener_censo()
-    votos = parsingDeFicheros.obtener_votantes()
+    censo = parsingDeFicheros.obtener_censo(None,None)
+    votos = parsingDeFicheros.obtener_votantes(None,None)
     censo_y_votos = [censo,votos]
     return render_template('votosPorCenso.html',censo_y_votos=censo_y_votos)
 
