@@ -13,7 +13,9 @@
 
 <script>
 
-    function getBigger() {
+
+     function getBigger() {
+
         var array1 = {{ votos|safe }};
         var array2 = {{ opciones|safe }};
 
@@ -58,12 +60,15 @@
         return color;
     }
 
+
     var grafica = {
         type: 'pie',
         data: {
             datasets: [{
                 data: {{ votos|safe }},
-                 backgroundColor: getBigger()
+
+                backgroundColor: getBigger(),
+
             }],
             labels: {{ opciones|safe }}
 
@@ -97,7 +102,6 @@
         var ctx = document.getElementById("chart-area").getContext("2d");
         window.graficaResultados = new Chart(ctx, grafica);
     };
-
 
 
 </script>
