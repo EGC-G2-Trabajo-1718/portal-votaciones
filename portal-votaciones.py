@@ -16,6 +16,10 @@ def index():
 def formulario():
     return render_template('formulario.html')
 
+@app.route('/listaEstilada')
+def listaEstilada():
+    return render_template('listaEstilada.html')
+
 @app.route('/myVotes')
 def myvotes():
     return render_template('listVotes.html')
