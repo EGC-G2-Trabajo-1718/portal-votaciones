@@ -1,4 +1,5 @@
 import os
+import binascii
 from flask import Flask, request,  render_template, url_for, session, json
 from flask.ext.session import Session
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -10,7 +11,6 @@ env = Environment(
 )
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
 app.config.from_pyfile('config.py')
 Session(app)
 
@@ -130,4 +130,4 @@ def indexTest():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=80)
+	app.run(debug=True, port=80)

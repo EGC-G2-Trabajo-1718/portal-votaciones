@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for, session, json, redirect
+from flask import Flask, request, render_template, url_for, session, json, redirect, flash
 from controllers import config
 import requests
 
@@ -48,6 +48,9 @@ class BaseController:
 				content = r.text
 				response = {'result': True, 'content': content}
 		except requests.exceptions.ConnectionError:
-			response = {'result': False, 'message' : 'Connection error!', 'request' : r}
+			try:
+				response = {'result': False, 'message' : 'Connection error!', 'request' : r}
+			except UnboundLocalError:
+				response = {'result': False, 'message': 'Connection error!'}
 
 		return response

@@ -22,8 +22,8 @@
                 <form action="{{ formUrl }}" method="POST" role="form">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input class="form-control" type="text" id="nombre" name="nombre" required
-                            {% if census != None %}
+                        <input class="form-control" type="text" id="nombre" name="nombre"
+                            {% if census != None  and 'nombre' in census%}
                                 value="{{ census.nombre }}"
                             {% endif %}
                         />
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <label for="roles">Rol/Grupo:</label>
-                        <select class="form-control" id="roles" name="rol" required>
+                        <select class="form-control" id="roles" name="id_grupo" required>
                           <option value="">Seleccione un rol/grupo</option>
                           <option value="ASISTENTE">ASISTENTE</option>
                           <option value="PONENTE">PONENTE</option>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label for="fecha_ini"> Fecha Inicio:</label>
                         <input  class="form-control" type="datetime-local" id="fecha_ini" name="fecha_ini" placeholder="dd/mm/yyyy hh:mm"
-                            {% if census != None %}
+                            {% if census != None  and 'fecha_ini' in census%}
                                 value="{{ census.fecha_ini }}"
                             {% endif %}
                         />
@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <label for="fecha_fin"> Fecha Fin:</label>
                         <input class="form-control" type="datetime-local" id="fecha_fin" name="fecha_fin" placeholder="dd/mm/yyyy hh:mm"
-                            {% if census != None %}
+                            {% if census != None and 'fecha_fin' in census %}
                                 value="{{ census.fecha_fin }}"
                             {% endif %}
                         />

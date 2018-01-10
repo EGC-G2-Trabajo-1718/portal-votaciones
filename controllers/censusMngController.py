@@ -45,6 +45,7 @@ class CensusMngController(BaseController):
 		dataResponse = self.filterCensus(data)
 
 		if ((dataResponse['result'] == False)):
+			flash(u'Hubo un error en la conexion con el sistema de censos', 'error')
 			response = redirect(url_for('index'))
 		else:
 			template = self.templatePath('list.html')
@@ -58,26 +59,126 @@ class CensusMngController(BaseController):
 		return render_template(template, census=None, formUrl=url_for('createCensus'))
 
 	def create(self):
-		return redirect(url_for('listCensus'))
+		data = {
+			'id_votacion' : request.form['id_votacion'],
+			'id_grupo': request.form['id_grupo']
+		}
+
+		if 'nombre' in request.form and len(request.form['nombre']) > 0:
+			data['nombre'] = request.form['nombre']
+
+		if 'fecha_ini' in request.form and len(request.form['fecha_ini']) > 0:
+			data['fecha_ini'] = self.datetimeToApi(request.form['fecha_ini'])
+
+		if 'fecha_fin' in request.form and len(request.form['fecha_fin']) > 0:
+			data['fecha_fin'] = self.datetimeToApi(request.form['fecha_fin'])
+
+		dataResponse = self.execRequest('/create', 'POST', data)
+
+		if ((dataResponse['result'] == False)):
+			flash(u'Hubo un error al eliminar el censo', 'error')
+			response = redirect(url_for('listCensus'))
+		elif ((dataResponse['result'] == True) and (dataResponse['content']['exito'] == 'true')):
+			flash(u'Censo creado correctamente', 'success')
+			response = redirect(url_for('listCensus'))
+		else:
+			template = self.templatePath('list.html')
+			response = render_template(template, data=dataResponse['content'])
+
+		return response
+
 
 	def editForm(self, census_id):
 		census = self.getCensus(census_id)
-		fecha_ini = census['fecha_ini'].split(' ')
-		fecha_ini_parts = fecha_ini[0].split('/')
-		fecha_ini_parts.reverse()
-		census['fecha_ini'] = '-'.join(fecha_ini_parts) + 'T' + fecha_ini[1]
 
-		fecha_fin = census['fecha_fin'].split(' ')
-		fecha_fin_parts = fecha_fin[0].split('/')
-		fecha_fin_parts.reverse()
-		census['fecha_fin'] = '-'.join(fecha_fin_parts) + 'T' + fecha_fin[1]
+		if len(census) > 0:
 
-		template = self.templatePath('createEditForm.html')
+			if 'fecha_ini' in census and len(census['fecha_ini']) > 0:
+				census['fecha_ini'] = self.datetimeToHTML(census['fecha_ini'])
 
-		return render_template(template, census=census, formUrl=url_for('editCensus', census_id=census['id']))
+			if 'fecha_fin' in census and len(census['fecha_fin']) > 0:
+				census['fecha_fin'] = self.datetimeToHTML(census['fecha_fin'])
+
+			template = self.templatePath('createEditForm.html')
+			response = render_template(template, census=census, formUrl=url_for('editCensus', census_id=census['id']))
+		else:
+			flash(u'El censo indicado no existe', 'error')
+			response = redirect(url_for('index'))
+
+		return response
 
 	def edit(self, census_id):
-		return request.form['fecha_fin']
+		census = self.getCensus(census_id)
+
+		if len(census) > 0:
+			census['id_votacion'] = request.form['id_votacion']
+			census['id_grupo'] = request.form['id_grupo']
+
+			if 'nombre' in request.form and len(request.form['nombre']) > 0:
+				census['nombre'] = request.form['nombre']
+			else:
+				if 'nombre' in census:
+					del census['nombre']
+
+			if 'fecha_ini' in request.form and len(request.form['fecha_ini']) > 0:
+				census['fecha_ini'] = self.datetimeToApi(request.form['fecha_ini'])
+			else:
+				if 'fecha_ini' in census:
+					del census['fecha_ini']
+
+			if 'fecha_fin' in request.form and len(request.form['fecha_fin']) > 0:
+				census['fecha_fin'] = self.datetimeToApi(request.form['fecha_fin'])
+			else:
+				if 'fecha_fin' in census:
+					del census['fecha_fin']
+
+			dataResponse = self.execRequest('/update', 'POST', census)
+
+			if ((dataResponse['result'] == False)):
+				flash(u'Hubo un error al eliminar el censo', 'error')
+				response = redirect(url_for('listCensus'))
+			elif ((dataResponse['result'] == True) and (dataResponse['content']['exito'] == 'true')):
+				flash(u'Censo modificado correctamente', 'error')
+				response = redirect(url_for('listCensus'))
+			else:
+				template = self.templatePath('list.html')
+				response = render_template(template, data=dataResponse['content'])
+		else:
+			response = redirect(url_for('index'))
+
+		return response
 
 	def deleteCensus(self, census_id):
-		return 'Delete census id: ' + str(census_id)
+		data = {
+			'id' : census_id
+		}
+
+		dataResponse = self.execRequest('/delete', 'GET', data)
+
+		if ((dataResponse['result'] == False)):
+			flash(u'Hubo un error al eliminar el censo', 'error')
+			response = redirect(url_for('listCensus'))
+		elif ((dataResponse['result'] == True) and (dataResponse['content']['exito'] == 'true')):
+			flash(u'Censo eliminado correctamente', 'success')
+			response = redirect(url_for('listCensus'))
+		else:
+			template = self.templatePath('list.html')
+			response = render_template(template, data=dataResponse['content'])
+
+		return response
+
+	def datetimeToHTML(self, datetime):
+		datetime_parts = datetime.split(' ')
+		date_parts = datetime_parts[0].split('/')
+		date_parts.reverse()
+		datetime_format = '-'.join(date_parts) + 'T' + datetime_parts[1]
+
+		return datetime_format
+
+	def datetimeToApi(self, datetime):
+		datetime_parts = datetime.split('T')
+		date_parts = datetime_parts[0].split('-')
+		date_parts.reverse()
+		datetime_format = '/'.join(date_parts) + ' ' + datetime_parts[1]
+
+		return datetime_format
