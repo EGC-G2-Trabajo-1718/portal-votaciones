@@ -1,0 +1,16 @@
+language: python
+python:
+  - "2.7"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - python test_travis.py
+  
+deploy:
+  provider: heroku
+  api_key:
+    secure: 2dc00a9f-b59c-43fb-b241-5a7b3897417c 
+  app: visualizacion
+  on: dev-visualizacion

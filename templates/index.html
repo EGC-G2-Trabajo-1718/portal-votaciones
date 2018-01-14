@@ -9,45 +9,34 @@
     <link href="{{ url_for('static', filename='css/cover.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-    <div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-          <header class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">Cover</h3>
-              <nav class="nav nav-masthead">
-                <a class="nav-link active" href="#">Inicio</a>
-                <a class="nav-link" href="#">Visualizar los resultados</a>
-                <a class="nav-link" href="#">Contact</a>
-                <a class="nav-link" href="#">Iniciar session</a>
-              </nav>
-            </div>
-          </header>
-
-          <main role="main" class="inner cover">
-            <h1 class="cover-heading">Portal de votación.</h1>
-            <p class="lead">El portal de votación .</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-            </p>
-          </main>
-
-
-
+<!-- Main component for a primary marketing message or call to action -->
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-center">¡Bienvenidos!</h1>
+        <div class="row">
+            <img src="../static/images/logo_us.png" class="col-sm-offset-2 col-sm-2 col-xs-offset-2 col-xs-7">
+            <p class="col-sm-6 text-center paddingCenterText col-xs-12"><b>nVotes US</b> es una aplicación desarrollada integramente
+                por
+                estudiantes de la Universidad de Sevilla(US), para la asignatura Evolución y gestión de la
+                configuración(EGC).</p>
         </div>
-
-      </div>
-
+        <div class="row">
+            <img src="../static/images/vote.png" class="col-sm-offset-2 col-sm-2 col-xs-offset-2 col-xs-7">
+            <p class="col-sm-6 text-center paddingCenterText col-xs-12"><b></b> Cree sus propias votaciones en pocos minutos y
+                gestione sus censos de votación y realice un seguimiento de sus resultados.</p>
+        </div>
+        <div class="row" style="margin-top: 5%">
+            <img src="../static/images/security.ico" class="col-sm-offset-2 col-sm-2 col-xs-offset-2 col-xs-7">
+            <p class="col-sm-6 text-center paddingCenterText col-xs-12">Todo esto garantizando la privacidad del voto y la
+                integridad de la votación mediante el uso de criptografía, doble verificación, etc...</p>
+        </div>
+        <p><a class="btn btn-lg btn-info col-sm-offset-5 col-xs-offset-3 paddingCenterText" href="/login" role="button">Iniciar Sesión</a></p>
     </div>
+
+</div>
+</body>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-
-</body>
 </html>

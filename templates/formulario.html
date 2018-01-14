@@ -8,36 +8,47 @@
 
 </head>
 <body>
+
+{% include 'menu.html' %}
+
 <div class="container">
 
     <div class="jumbotron">
         <form method="post" role="form">
             <div class="form-group">
-                <label for="ej_nombre">Nombre</label>
-                <input type="text" class="form-control" id="ej_nombre"
-                       placeholder="Introduce el nombre de la votación">
+                <label for="ej_nombre" class="col-md-2">Nombre</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="ej_nombre" placeholder="Nombre de la votación">
+                </div>
             </div>
             <div class="form-group">
-                <label for="ej_censo">Censo</label>
-                <select class="form-control" id="ej_censo" required>
-                    <option>Censo 1</option>
-                    <option>Censo 2</option>
-                    <option>Censo 3</option>
-                    <option>Censo 4</option>
-                </select>
+                <label for="ej_censo" class="col-md-2">Censo</label>
+                <div class="col-md-10">
+                    <select class="form-control" id="ej_censo" required>
+                        <option>Censo 1</option>
+                        <option>Censo 2</option>
+                        <option>Censo 3</option>
+                        <option>Censo 4</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
-                <label for="ej_votacion">Votacion</label>
-                <select class="form-control" id="ej_votacion" required>
-                    <option>Votacion 1</option>
-                    <option>Votacion 2</option>
-                    <option>Votacion 3</option>
-                    <option>Votacion 4</option>
-                </select>
+                <label for="ej_votacion" class="col-md-2">Votacion</label>
+                <div class="col-md-10">
+                    <select class="form-control" id="ej_votacion" required>
+                        <option>Votacion 1</option>
+                        <option>Votacion 2</option>
+                        <option>Votacion 3</option>
+                        <option>Votacion 4</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
-                <label for="ej_observacion">Observaciones</label>
-                <textarea class="form-control" rows="5" id="ej_observacion" placeholder="Inserte las observaciones (si procede)."></textarea>
+                <label for="ej_observacion" class="col-md-2">Observaciones</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="5" id="ej_observacion"
+                              placeholder="Inserte las observaciones (si procede)."></textarea>
+                </div>
             </div>
             <div class="form-group">
                 <label for="ej_radio">Pregunta</label>
@@ -45,9 +56,11 @@
                 <label class="radio-inline"><input type="radio" name="optradio" id="ej_radio">Option 1</label>
                 <label class="radio-inline"><input type="radio" name="optradio" id="ej_radio1">Option 2</label>
                 <label class="radio-inline"><input type="radio" name="optradio" id="ej_radio2">Option 3</label>
+                <br>
             </div>
 
-            <button type="submit" class="btn btn-default">Enviar</button>
+            <a class="btn btn-info col-md-2 col-xs-12" href="/">Enviar</a>
+            <a class="btn btn-danger col-md-offset-1 col-md-2 col-xs-12" href="/">Cancelar</a>
         </form>
     </div>
 

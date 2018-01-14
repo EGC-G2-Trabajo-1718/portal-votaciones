@@ -1,0 +1,72 @@
+<!--LLAMADA AL SCRIPT DE LA GRAFICA-->
+<div>
+    <!--TO DO: modificar dimensiones-->
+    <canvas id="myChart"></canvas>
+</div>
+
+<!-- SCRIPT DE LA PROPIA GRÁFICA-->
+<script type="text/javascript">
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+
+        /*TIPO DE GRÁFICO*/
+        type: 'bar',
+
+        data: {
+
+            /* ETIQUETAS */
+            labels: {{ edades|safe }},
+            datasets: [{
+                label: 'Votos por edades',
+
+                /* DATOS (parcheados previamente) */
+                data: {{ recuento|safe }},
+
+                /*ESTILOS DE LA GRAFICAS*/
+                backgroundColor: [
+                    /* red, green, azul, transparencia(0->transparente, 1->solido)*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)',    /*Morado*/
+                    'rgba(95, 26, 81, 0.5)'    /*Morado*/
+
+
+                ],
+                borderColor: [
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)',    /*Morado*/
+                    'rgba(95, 26, 81, 1)'    /*Morado*/
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Número de votos por rango de edad',
+                fontColor: 'grey',
+                fontSize: 22,
+                fontStyle: ''
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

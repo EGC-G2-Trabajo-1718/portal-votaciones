@@ -1,0 +1,63 @@
+<div>
+    <!--TO DO: modificar dimensiones-->
+    <canvas id="myChart"></canvas>
+</div>
+
+<!-- SCRIPT DE LA PROPIA GRÁFICA-->
+<script type="text/javascript">
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+
+        /*TIPO DE GRÁFICO*/
+        type: 'bar',
+
+        data: {
+
+            /* ETIQUETAS */
+            labels: {{ tramos|safe }},
+            datasets: [{
+                label: 'Votos por tramo horario',
+
+                /* DATOS (parcheados previamente) */
+                data: {{ votos|safe }},
+
+                /*ESTILOS DE LA GRAFICAS*/
+                backgroundColor: [
+                    /* red, green, azul, transparencia(0->transparente, 1->solido)*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+                    'rgba(255, 51, 215, 0.5)', /*Rosa*/
+
+
+                ],
+                borderColor: [
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+                     'rgba(255, 51, 215, 1)', /*Rosa*/
+
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

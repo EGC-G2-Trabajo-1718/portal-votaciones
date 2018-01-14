@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Resultados de la votación</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+</head>
+
+<body>
+<div id="canvas-holder" style="width:50% ">
+    <canvas id="chart-area"/>
+</div>
+
+<script>
+
+
+     function getBigger() {
+
+        var array1 = {{ votos|safe }};
+        var array2 = {{ opciones|safe }};
+
+        var int = array1[0];
+        for(var i = 0; i< array1.length; i++){
+            if(array1[i] >= int){
+                int = array1[i];
+            }
+        }
+
+        var votos = int;
+        var posicion = array1.indexOf(int);
+        var opcion = array2[posicion];
+
+        var arrayColoresBackgroud= [];
+
+        var color1 = getRandomColor();
+        var color2 = getRandomColor();
+
+        for (var i = 0; i< array1.length; i++){
+            if(i==posicion){
+                arrayColoresBackgroud.push(color2);
+            }else{
+               arrayColoresBackgroud.push(color1);
+            }
+        }
+
+        return arrayColoresBackgroud;
+
+    }
+
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+
+        }
+
+        return color;
+    }
+
+
+    var grafica = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{ votos|safe }},
+
+                backgroundColor: getBigger(),
+
+            }],
+            labels: {{ opciones|safe }}
+
+        },
+        options: {
+            responsive: true,
+            legend: {
+                labels: {
+
+                    fontColor: 'black',
+                    fontStyle: 'bold'
+
+                },
+                position: 'bottom',
+            },
+            title: {
+                display: true,
+                text: 'Resultados de la votación',
+                fontColor: 'black',
+                fontSize: 25,
+                fontStyle: 'bold'
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+            
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.graficaResultados = new Chart(ctx, grafica);
+    };
+
+
+</script>
+
+
+</body>
+
+</html>

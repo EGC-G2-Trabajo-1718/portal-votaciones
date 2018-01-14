@@ -1,0 +1,93 @@
+
+<!--LLAMADA AL SCRIPT DE LA GRAFICA-->
+<div class="container">
+    <!--TO DO: modificar dimensiones-->
+    <canvas id="myChart"></canvas>
+</div>
+
+<!-- SCRIPT DE LA PROPIA GRÁFICA-->
+<script type="text/javascript">
+
+    var ctx = document.getElementById("myChart");
+    var color = getRandomColor();
+
+    var myChart = new Chart(ctx, {
+
+        /*TIPO DE GRÁFICO*/
+        type: 'bar',
+
+        data: {
+
+            /* ETIQUETAS */
+            labels: {{ paises|safe }},
+            datasets: [{
+                label: 'Votos por ciudad',
+
+                /* DATOS (pendientes de parchear objetos de las apis) */
+                data: {{ votos|safe }},
+
+
+
+                /*ESTILOS DE LA GRAFICAS*/
+
+                    backgroundColor: [
+
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)'
+
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)'
+
+
+                ],
+                borderWidth: 2
+            }]
+
+
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+
+
+</script>
