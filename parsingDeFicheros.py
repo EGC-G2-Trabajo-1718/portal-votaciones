@@ -70,6 +70,7 @@ def parseLugaresGeograficos(opcion):
 
     return sitios, array_recuento
 
+print parseLugaresGeograficos('ciudades')
 
 def obtener_censo(id,auth):
     if((id and auth) != None):
