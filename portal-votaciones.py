@@ -5,11 +5,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return 'Hello world!'
-
-
-@app.route('/index')
-def index():
     return render_template('index.html')
 
 @app.route('/login')
@@ -30,10 +25,10 @@ def myvotes():
 
 @app.route('/vote')
 def vote():
-    censo = parsingDeFicheros.obtener_censo()
-    votos = parsingDeFicheros.obtener_votantes()
+    censo = parsingDeFicheros.obtener_censo(None, None)
+    votos = parsingDeFicheros.obtener_votantes(None, None)
     censo_y_votos = [censo, votos]
-    opciones,votos = parsingDeFicheros.votosPorOpcion()
+    opciones,votos = parsingDeFicheros.votosPorOpcionNuevaApi(None,None)
     return render_template('vote.html',opciones=opciones, votos=votos, censo_y_votos=censo_y_votos)
 
 @app.route('/nationalityChart')
