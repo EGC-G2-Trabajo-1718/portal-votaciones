@@ -150,4 +150,3 @@ def votosPorTramoHorario():
     return tramos,array_recuento
 
 
-print votosPorTramoHorario()

@@ -31,10 +31,15 @@ def vote():
     opciones,votos = parsingDeFicheros.votosPorOpcionNuevaApi(None,None)
     return render_template('vote.html',opciones=opciones, votos=votos, censo_y_votos=censo_y_votos)
 
+@app.route('/cityChart')
+def cityChart():
+    ciudades,votos = parsingDeFicheros.parseLugaresGeograficos("ciudades")
+    return render_template('cityChart.html',ciudades=ciudades, votos=votos)
+
 @app.route('/nationalityChart')
 def nacionalityChart():
-    ciudades,votos = parsingDeFicheros.parseLugaresGeograficos("ciudades")
-    return render_template('nationalityChart.html',ciudades=ciudades, votos=votos)
+    paises,votos = parsingDeFicheros.parseLugaresGeograficos("paises")
+    return render_template('nationalityChart.html',paises=paises, votos=votos)
 
 @app.route('/ageChart')
 def ageChart():
@@ -45,13 +50,6 @@ def ageChart():
 def hourChart():
     tramos,votos = parsingDeFicheros.votosPorTramoHorario()
     return render_template('hourChart.html',tramos=tramos, votos=votos)
-
-
-@app.route('/graficaPaises')
-def graficaPaises():
-    paises,votos = parsingDeFicheros.parseLugaresGeograficos("paises")
-    return render_template('graficaPais.html',paises=paises, votos=votos)
-
 
 
 if __name__ == '__main__':
