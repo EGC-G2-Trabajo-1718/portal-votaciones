@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <title>{{ title }}</title>
+     </head>
+     <body>
+        <form action="poll/create" method="post">
+            <label for="titulo">Título:</label>
+            <input name="titulo" type="text" value=""/>
+            <br />
+            <div>
+                <label for="censo">Censo:</label>
+                <select id="censo" name="id_censo" required>
+                    <option value="">Seleccione un grupo</option>
+                    <option value="id_c1">Censo A</option>
+                    <option value="id_c2">Censo B</option>
+                    <option value="id_c3">Censo C</option>
+                    <option value="id_c4">...</option>
+            </select>
+            </div>
+            <div>
+                <label for="votacion"> Votación:</label>
+                <select id="votacion" name="id_votacion" required>
+                    <option value="">Seleccione una votación</option>
+                    <option value="id_v1">Votación tipo A</option>
+                    <option value="id_v2">Votación tipo B</option>
+                    <option value="id_v3">Votación tipo C</option>
+                    <option value="id_v4">...</option>
+                </select>
+            </div> 
+            <label for="pregunta1">Pregunta 1: ¿ Asistió a las jornadas de EGC ?</label>
+            <input type="radio" name="respuesta1" value="si" checked> Sí<br>
+            <input type="radio" name="respuesta1" value="no" checked> No<br>
+
+            <label for="pregunta2">Pregunta 2: Califique la organización de estas</label>
+                <input type="radio" name="respuesta2" value="excelente" checked> excelente<br>
+                <input type="radio" name="respuesta2" value="muy buena" checked> muy buena<br>
+                <input type="radio" name="respuesta2" value="buenisima" checked> buenisima<br>
+                <input name="" type="submit" value="Save"/>
+        </form>
+    </body>
+</html>
