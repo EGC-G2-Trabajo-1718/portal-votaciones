@@ -1,0 +1,3 @@
+docker run -d -p 3000:80 -v /home/belen/Documentos/proyecto/portal-votaciones/nuevaApi.json:/data/db.json clue/json-server
+
+La ruta /home/belen/Documentos/proyecto/portal-votaciones/nuevaApi.json se refiere al lugar donde está alojado en el equipo el fichero a ejecutar
