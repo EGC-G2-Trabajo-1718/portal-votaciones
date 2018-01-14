@@ -70,7 +70,7 @@ def parseLugaresGeograficos(opcion):
 
     return sitios, array_recuento
 
-print parseLugaresGeograficos('ciudades')
+
 
 def obtener_censo(id,auth):
     if((id and auth) != None):
@@ -111,20 +111,6 @@ def votosPorOpcionNuevaApi(id,auth):
     return opciones, votos
 
 
-def votosPorOpcion():
-    opciones = []
-    votos = []
-
-    datos = extraccion_datos('http://localhost:3000/recuentoDatosCompletos');
-
-    for i in datos[0]['results']:
-        opciones.append(i.encode('utf-8'))
-
-    for i in datos[0]['results'].values():
-        votos.append(i);
-
-    return opciones, votos
-
 
 def votosPorTramoHorario():
     tramos = ["00:00 - 05:00", "05:00 - 10:00", "10:00 - 15:00", "15:00 - 20:00", "20:00 - 24:00"]
@@ -164,3 +150,4 @@ def votosPorTramoHorario():
     return tramos,array_recuento
 
 
+print votosPorTramoHorario()
