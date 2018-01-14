@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista estilada</title>
+    {% include 'includes.html' %}
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Titulo</th>
+                    <th>Mi estado</th>
+                    <th>nº Votos</th>
+                    <th>Censo</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="list-group-item-success">
+                    <td>Abierta</td>
+                    <td>Elecciones1</td>
+                    <td>Votado</td>
+                    <td>2.500.000</td>
+                    <td>ComunidadAutonoma1</td>
+                    <td><a href="../vote" class="btn btn-primary">Mostrar</a></td>
+                </tr>
+                <tr class="list-group-item-warning">
+                    <td>Cerrada</td>
+                    <td>Elecciones2</td>
+                    <td>No Votado</td>
+                    <td>1.000.000</td>
+                    <td>ComunidadAutonoma2</td>
+                    <td><a href="../vote" class="btn btn-primary">Mostrar</a></td>
+
+                </tr>
+                 <tr class="list-group-item-danger">
+                    <td>Cancelada</td>
+                    <td>Elecciones3</td>
+                    <td>No Votado</td>
+                    <td>1.000.000</td>
+                    <td>ComunidadAutonoma3</td>
+                    <td><a href="../vote" class="btn btn-primary">Mostrar</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
