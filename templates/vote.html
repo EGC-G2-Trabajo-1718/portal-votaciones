@@ -42,6 +42,40 @@
 
 <script>
 
+    function getBigger() {
+
+        var array1 = {{ votos|safe }};
+        var array2 = {{ opciones|safe }};
+
+        var int = array1[0];
+        for(var i = 0; i< array1.length; i++){
+            if(array1[i] >= int){
+                int = array1[i];
+            }
+        }
+
+        var votos = int;
+        var posicion = array1.indexOf(int);
+        var opcion = array2[posicion];
+
+        var arrayColoresBackgroud= [];
+
+        var color1 = getRandomColor();
+        var color2 = getRandomColor();
+
+        for (var i = 0; i< array1.length; i++){
+            if(i==posicion){
+                arrayColoresBackgroud.push(color2);
+            }else{
+               arrayColoresBackgroud.push(color1);
+            }
+        }
+
+        return arrayColoresBackgroud;
+
+    }
+
+
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
         var color = '#';
@@ -59,7 +93,7 @@
         data: {
             datasets: [{
                 data: {{ votos|safe }},
-                backgroundColor: getRandomColor(),
+                backgroundColor: getBigger(),
 
             }],
             labels: {{ opciones|safe }}

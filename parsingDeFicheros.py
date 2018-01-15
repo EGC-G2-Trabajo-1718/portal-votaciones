@@ -71,6 +71,7 @@ def parseLugaresGeograficos(opcion):
     return sitios, array_recuento
 
 
+
 def obtener_censo(id,auth):
     if((id and auth) != None):
         datos = extraccion_datos('http://egc-recuento1718.es/api/polls/' + str(id) + '/' + str(auth));
@@ -109,20 +110,6 @@ def votosPorOpcionNuevaApi(id,auth):
 
     return opciones, votos
 
-
-def votosPorOpcion():
-    opciones = []
-    votos = []
-
-    datos = extraccion_datos('http://localhost:3000/recuentoDatosCompletos');
-
-    for i in datos[0]['results']:
-        opciones.append(i.encode('utf-8'))
-
-    for i in datos[0]['results'].values():
-        votos.append(i);
-
-    return opciones, votos
 
 
 def votosPorTramoHorario():
