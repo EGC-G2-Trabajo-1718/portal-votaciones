@@ -149,4 +149,36 @@ def votosPorTramoHorario():
 
     return tramos,array_recuento
 
+def parseEdades2():
+    edades = ["20-25", "25-30", "30-35", "35-40", "40-45", "45-50"]
+    array_recuento = [0, 0, 0, 0, 0, 0]
+
+    datos = extraccion_datos('http://localhost:3000/edades');
+
+    def acumulador(recuento):
+
+        if (edad_objeto >= 20 and edad_objeto <= 25):
+            recuento[0] = recuento[0] + 1
+        elif (edad_objeto >= 25 and edad_objeto <= 30):
+            recuento[1] = recuento[1] + 1
+        elif (edad_objeto >= 30 and edad_objeto <= 35):
+            recuento[2] = recuento[2] + 1
+        elif (edad_objeto >= 35 and edad_objeto <= 40):
+            recuento[3] = recuento[3] + 1
+        elif (edad_objeto >= 40 and edad_objeto <= 45):
+            recuento[4] = recuento[4] + 1
+
+        else:
+            recuento[5] = recuento[5] + 1
+
+        return recuento
+
+    for i in datos[0]['data']:
+        edad_objeto = i['edad']
+        acumulador(array_recuento)
+
+    return edades, array_recuento;
+
+print parseEdades2()
+
 
