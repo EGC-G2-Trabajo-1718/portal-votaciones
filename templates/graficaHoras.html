@@ -1,12 +1,12 @@
 <div>
     <!--TO DO: modificar dimensiones-->
-    <canvas id="myChart"></canvas>
+    <canvas id="myChartHoras"></canvas>
 </div>
 
 <!-- SCRIPT DE LA PROPIA GRÁFICA-->
 <script type="text/javascript">
 
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChartHoras");
     var myChart = new Chart(ctx, {
 
         /*TIPO DE GRÁFICO*/
@@ -20,7 +20,7 @@
                 label: 'Votos por tramo horario',
 
                 /* DATOS (parcheados previamente) */
-                data: {{ votos|safe }},
+                data: {{ votos_horas|safe }},
 
                 /*ESTILOS DE LA GRAFICAS*/
                 backgroundColor: [

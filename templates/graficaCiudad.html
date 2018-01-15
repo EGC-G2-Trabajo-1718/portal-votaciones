@@ -1,12 +1,12 @@
 <div class="container">
     <!--TO DO: modificar dimensiones-->
-    <canvas id="myChart"></canvas>
+    <canvas id="myChartCiudad"></canvas>
 </div>
 
 <!-- SCRIPT DE LA PROPIA GRÁFICA-->
 <script type="text/javascript">
 
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChartCiudad");
     var color = getRandomColor();
 
     var myChart = new Chart(ctx, {
@@ -22,7 +22,7 @@
                 label: 'Votos por ciudad',
 
                 /* DATOS (pendientes de parchear objetos de las apis) */
-                data: {{ votos|safe }},
+                data: {{ votos_ciudad|safe }},
 
                 backgroundColor: color,
                 borderColor: color,
