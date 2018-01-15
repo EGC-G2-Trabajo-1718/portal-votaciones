@@ -10,3 +10,4 @@ Werkzeug
 click
 itsdangerous
 requests
+Flask-Session
