@@ -1,17 +1,17 @@
 <!--LLAMADA AL SCRIPT DE LA GRAFICA-->
 <div>
     <!--TO DO: modificar dimensiones-->
-    <canvas id="myChart"></canvas>
+    <canvas id="myChartEdad"></canvas>
 </div>
 
 <!-- SCRIPT DE LA PROPIA GRÁFICA-->
 <script type="text/javascript">
 
-    var ctx = document.getElementById("myChart");
+    var ctx = document.getElementById("myChartEdad");
     var myChart = new Chart(ctx, {
 
         /*TIPO DE GRÁFICO*/
-        type: 'bar',
+        type: 'horizontalBar',
 
         data: {
 
@@ -21,7 +21,7 @@
                 label: 'Votos por edades',
 
                 /* DATOS (parcheados previamente) */
-                data: {{ recuento|safe }},
+                data: {{ votos_edad|safe }},
 
                 /*ESTILOS DE LA GRAFICAS*/
                 backgroundColor: [
