@@ -7,7 +7,7 @@ from controllers import indexController, authController, censusMngController, vo
 import parsingDeFicheros
 
 env = Environment(
-    loader=PackageLoader('nVotes', 'templates'),
+    loader=PackageLoader('main', 'templates'),
     autoescape=select_autoescape(['html', 'xml'])
 )
 
@@ -116,10 +116,6 @@ def deleteCensus(census_id):
 	response = censusMngController.deleteCensus(census_id)
 	return response
 
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 @app.route('/formulario')
 def formulario():
